@@ -1,0 +1,32 @@
+apiVersion: apps/v1beta2 # use apps/v1 for > 1.9.0 
+kind: Deployment
+metadata:
+  name: random-gen
+spec:
+  selector:
+    matchLabels:
+      app: rnd
+      tier: backend
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: rnd
+        tier: backend
+    spec:
+      containers:
+      - name: rnd-microsvc
+        image: devopz/random-microservice
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 100m
+          limits:
+            memory: 128Mi
+            cpu: 250m
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        ports:
+        - containerPort: 3000
+
