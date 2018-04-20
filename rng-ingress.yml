@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rng-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+  - host: microsvc.example.com
+    http:
+      paths:
+      - path: /rng
+        backend:
+          serviceName: rng-svc
+          servicePort: 3000

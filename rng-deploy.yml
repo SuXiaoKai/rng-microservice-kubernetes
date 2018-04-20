@@ -1,21 +1,21 @@
 apiVersion: apps/v1beta2 # use apps/v1 for > 1.9.0 
 kind: Deployment
 metadata:
-  name: random-gen
+  name: rng-deploy
 spec:
   selector:
     matchLabels:
-      app: rnd
+      app: rng
       tier: backend
-  replicas: 4
+  replicas: 3
   template:
     metadata:
       labels:
-        app: rnd
+        app: rng
         tier: backend
     spec:
       containers:
-      - name: rnd-microsvc
+      - name: rng-microsvc
         image: devopz/random-microservice
         resources:
           requests:
